@@ -11,5 +11,6 @@ namespace AddToCart.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public string Photo { get; set; }
+        public int Stock { get; set; }
     }
 }

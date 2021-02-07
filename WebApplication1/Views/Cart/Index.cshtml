@@ -7,43 +7,62 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="C:\Users\IS97531\.nuget\packages\bootstrap\4.6.0\contentFiles\any\any\wwwroot\css\bootstrap.min.css" rel="stylesheet" />
-    <script src="C:\Users\IS97531\.nuget\packages\bootstrap.sass\4.6.0\contentFiles\any\any\wwwroot\js\bootstrap.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <title>Cart</title>
 </head>
 <body>
-    <h3>Cart Page</h3>
-    <table class = "table table-bordered" cellpadding="4" cellspacing="4" border="1">
-        <tr>
-            <th>Option</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Photo</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Sub Total</th>
+    <h1 style="color:darkorange; font-weight:bold;">Sepetim</h1>
+    <table class ="table-bordered"  cellpadding="4" cellspacing="4" border="1">
+        <tr style="text-align:center;">
+            <th scope="col" width="150px" height="100px">İşlem</th>
+            <th scope="col" width="150px" height="100px">Ürün Kodu</th>
+            <th scope="col" width="150px" height="100px">Ürün Adı</th>
+            <th scope="col" width="150px" height="100px">Fotoğraf</th>
+            <th scope="col" width="150px" height="100px">Fiyat</th>
+            <th scope="col" width="150px" height="100px">Adet</th>
+            <th scope="col" width="150px" height="100px">Stok Durumu</th>
+            <th scope="col" width="150px" height="100px">Sepet Tutarı</th>
         </tr>
         @foreach (var item in ViewBag.cart)
         {
-            <tr>
-                <td><a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remove</a></td>
-                <td>@item.Product.Id</td>
-                <td>@item.Product.Name</td>
-                <td><img src="~/images/@item.Product.Photo" width="60" /> </td>
-                <td>@item.Product.Price</td>
-                <td>@item.Quantity</td>
-                <td>@(item.Product.Price * item.Quantity)</td>
-            </tr>
+        <tr style="text-align:center;">
+            <td scope="row"><a style="color:red;font-weight:bold;" asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Sil</a></td>
+            <td style="color:black;font-style:italic;">@item.Product.Id</td>
+            <td style="color:darkblue;">@item.Product.Name</td>
+            <td><img src="~/images/@item.Product.Photo" width="100" /> </td>
+            <td>@item.Product.Price TL</td>
+            <td>@item.Quantity</td>
+            @if (@item.Stock > 0)
+            {
+                <td>Stokta var ( @item.Stock adet )</td>
+            }
+            else
+            {
+                <td style="color:red; font-weight:bold; font-style:italic;">Stoktaki son ürünü sepetinize eklediniz!</td>
+
+            }
+                <td>@(item.Product.Price * item.Quantity)  TL</td>
+        </tr>
         }
-        <tr>
-            <td align="right" colspan="6">Sum</td>
+        <tr style="text-align:center;">
+            <td align="right" colspan="7">Toplam</td>
             <td>
-                @ViewBag.total
+                @ViewBag.total  TL
             </td>
         </tr>
     </table>
     <br>
-    <a asp-controller="product" asp-action="index">Continue Shopping</a>
+    <a style = "color:cornflowerblue;font-weight:bold; font-size:large;" asp-controller="product" asp-action="index">Alışverişe Devam Et</a>
 
 </body>
 </html>

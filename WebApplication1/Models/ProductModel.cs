@@ -14,38 +14,43 @@ namespace AddToCart.Models
             Products = new List<Product>() {
                 new Product
                 {
-                    Id = "f01",
-                    Name = "Flower 1",
+                    Id = "F0001",
+                    Name = "Akvaryum Vazo",
                     Price = 50,
-                    Photo = "Flower1.PNG"
+                    Photo = "Flower1.PNG",
+                    Stock = 1
                 },
                 new Product
                 {
-                    Id = "f02",
-                    Name = "Flower 2",
+                    Id = "F0002",
+                    Name = "Lilyum Aranjman",
                     Price = 80,
-                   Photo = "Flower2.PNG"
+                   Photo = "Flower2.PNG",
+                   Stock = 3
                 },
                 new Product
                 {
-                    Id = "f03",
-                    Name = "Flower 3",
+                    Id = "F0003",
+                    Name = "Doğal Ahşap Kütük",
                     Price = 60,
-                    Photo = "Flower3.PNG"
+                    Photo = "Flower3.PNG",
+                    Stock = 6
                 },
                 new Product
                 {
-                    Id = "f04",
-                    Name = "Flower 4",
+                    Id = "F0004",
+                    Name = "Papatya Bahçesi",
                     Price = 40,
-                    Photo = "Flower4.PNG"
+                    Photo = "Flower4.PNG",
+                    Stock = 7
                 },
                 new Product
                 {
-                    Id = "f05",
-                    Name = "Flower 5",
+                    Id = "F0005",
+                    Name = "Pembe Gerberalar",
                     Price = 70,
-                    Photo = "Flower5.PNG"
+                    Photo = "Flower5.PNG",
+                    Stock = 2
                 }
             };
         }

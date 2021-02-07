@@ -24,10 +24,12 @@ namespace AddToCart.Controllers
         public IActionResult Buy(string id)
         {
             ProductModel productModel = new ProductModel();
+            int productStock;
             if (SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart") == null)
             {
                 List<Item> cart = new List<Item>();
-                cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });
+                productStock = productModel.find(id).Stock - 1;
+                cart.Add(new Item { Product = productModel.find(id), Quantity = 1, Stock = productStock });
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
             else
@@ -36,11 +38,20 @@ namespace AddToCart.Controllers
                 int index = isExist(id);
                 if (index != -1)
                 {
-                    cart[index].Quantity++;
+                    if(productModel.find(id).Stock > 0)
+                    {
+                        cart[index].Quantity++;
+                        cart[index].Stock--;
+                    }
+                    else
+                    {
+                        Alert(productModel.find(id).Id);
+                    }
                 }
                 else
                 {
-                    cart.Add(new Item { Product = productModel.find(id), Quantity = 1 });
+                    productStock = productModel.find(id).Stock - 1;
+                    cart.Add(new Item { Product = productModel.find(id), Quantity = 1, Stock = productStock });
                 }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
@@ -68,6 +79,14 @@ namespace AddToCart.Controllers
                 }
             }
             return -1;
+        }
+        
+        public ActionResult Alert(string id)
+        {
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            ViewBag.cart = cart;
+            ViewBag.cart.Stock = cart[isExist(id)].Stock;
+            return View();
         }
 
     }
